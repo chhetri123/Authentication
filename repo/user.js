@@ -21,6 +21,20 @@ class UserRepo {
       })
     );
   }
+  async getByOne(attr) {
+    const records = await this.getAll();
+    for (let record of records) {
+      let found = true;
+      for (let key in attr) {
+        if (record[key] !== attr[key]) {
+          found = false;
+        }
+      }
+      if (found) {
+        return record;
+      }
+    }
+  }
 
   async writeAll(record) {
     await fs.promises.writeFile(this.filename, JSON.stringify(record, null, 2));
