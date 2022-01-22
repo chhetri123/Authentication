@@ -1,14 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const authRouter = require("./routes/auth");
-const cookies = require("cookie-session");
+// const authRouter = require("./routes/auth");
+const globalErrorHandler = require("./controller/errController");
+const userRoutes = require("./routes/userRoutes");
 const app = express();
-
+app.use(express.json());
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookies({ keys: ["manish"] }));
-app.use(authRouter);
-
-app.listen(3000, () => {
-  console.log("app is listening");
-});
+// app.use(authRouter);
+app.use("/api/v1/users", userRoutes);
+app.use(globalErrorHandler);
+module.exports = app;

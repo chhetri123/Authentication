@@ -1,6 +1,6 @@
 const layout = require("./layout");
 const getErrors = require("./errors");
-
+JSON;
 module.exports = ({ errors }) => {
   return layout({
     content: ` <div class="container">
